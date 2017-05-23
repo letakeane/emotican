@@ -1,6 +1,15 @@
+/*FALLBACKS*/
+article {
+  display: block;
+}
+
 .App {
   text-align: center;
   font-family:
+}
+
+a {
+  text-decoration: none;
 }
 
 header {
@@ -15,6 +24,11 @@ h1 {
   color: #EDCD9C;
   font-size: 60px;
   font-weight: 700;
+}
+
+.logo-o {
+  width: 35px;
+  margin-left: 5px;
 }
 
 .logo-i {
@@ -36,7 +50,7 @@ li {
   text-align: center;
 }
 
-a {
+li a {
   text-decoration: none;
   color: #EDCD9C;
   font-size: 30px;
