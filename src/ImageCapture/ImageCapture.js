@@ -28,13 +28,50 @@ console.log('trying to stop video');
     video.pause();
   }
 
+  sendToImgur(faceURL) {
+    const headers = {
+      "method": "POST",
+      "hostname": "api.imgur.com",
+      "port": null,
+      "path": "/3/image",
+      "headers": {
+        "//authorization": "Client-ID 10c0cf1412fad3",
+        "authorization": "Bearer 7887599b4a9c2cec883836f79b9612f772bb4a01"
+      }
+    }
+
+    const body = {
+      "image": `'${faceURL}'`,
+      "album": "{M5OtG}",
+      "name": 'face.png',
+      "type": 'url'
+    }
+
+    const request = {
+      "method": "POST",
+      "headers": headers,
+      "body": body
+    }
+
+    fetch('https://api.imgur.com/3/image', request)
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data.link);
+      // this.props.analyzeEmotions(faceURL);
+      })
+      .catch(error => console.log('error posting to imgur: ', error))
+  }
+
   takeSnapshot(video, ctx, canvas) {
     if (video) {
       ctx.drawImage(video, 350, 20, 600, 700, 0, 0, 300, 350);
       this.endImageCapture(video);
       canvas.toBlob((blob) => {
-          let newImg = document.createElement('img'),
-          url = URL.createObjectURL(blob);
+          let newImg = document.createElement('img');
+          let att = document.createAttribute("class");
+          att.value = "hidden";
+          newImg.setAttributeNode(att);
+          let url = URL.createObjectURL(blob);
 
           newImg.onload = () =>{
               URL.revokeObjectURL(url);
@@ -44,8 +81,8 @@ console.log('trying to stop video');
             document.body.appendChild(newImg);
         })
         const faceURL = document.querySelector('img').src;
-        console.log(faceURL);
-      // this.props.analyzeEmotions(faceURL);
+  console.log(faceURL);
+        // this.sendToImgur(faceURL);
     }
   }
 
@@ -66,7 +103,7 @@ console.log('trying to stop video');
                 onClick={() => this.captureImage()}>
           take picture
         </button>
-        <canvas height='350px' width='300px'></canvas>
+        <canvas height='350px' width='300px' hidden></canvas>
       </article>
     )
   }

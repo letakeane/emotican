@@ -114,3 +114,7 @@ video {
   left: 50%;
   transform: translateX(-50%);
 }
+
+.image-capture img {
+  display: none;
+}
