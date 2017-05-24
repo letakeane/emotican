@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { NavBar } from '../NavBar/NavBar';
 import { Instructions } from '../Instructions/Instructions';
-import { Play } from '../Play/Play';
+import Play from '../Play/Play';
 import { Learn } from '../Learn/Learn';
 import logoO from '../images/logo-o.png';
 import './App.css';
